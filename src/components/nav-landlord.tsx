@@ -91,7 +91,7 @@ export function NavLandlord({ unreadCount, fullName }: Props) {
 
       {/* Mobile bottom nav */}
       <nav className="lg:hidden fixed bottom-0 inset-x-0 bg-slate-900 border-t border-slate-700 z-50">
-        <div className="flex justify-around">
+        <div className="flex overflow-x-auto scrollbar-hide">
           {navItems.map(({ href, label, icon: Icon, exact }) => {
             const active = exact ? pathname === href : pathname.startsWith(href)
             return (
@@ -99,7 +99,7 @@ export function NavLandlord({ unreadCount, fullName }: Props) {
                 key={href}
                 href={href}
                 className={cn(
-                  'flex flex-col items-center gap-0.5 px-2 py-2 text-xs flex-1',
+                  'flex flex-col items-center gap-0.5 px-4 py-2 text-xs shrink-0',
                   active ? 'text-white' : 'text-slate-400'
                 )}
               >
@@ -111,7 +111,7 @@ export function NavLandlord({ unreadCount, fullName }: Props) {
           <Link
             href="/landlord/notifications"
             className={cn(
-              'flex flex-col items-center gap-0.5 px-2 py-2 text-xs flex-1 relative',
+              'flex flex-col items-center gap-0.5 px-4 py-2 text-xs shrink-0 relative',
               pathname.startsWith('/landlord/notifications') ? 'text-white' : 'text-slate-400'
             )}
           >
