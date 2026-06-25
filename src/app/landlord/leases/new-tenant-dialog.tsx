@@ -5,7 +5,6 @@ import { createTenantAccount } from '@/app/actions/admin'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { UserPlus } from 'lucide-react'
 import { toast } from 'sonner'
@@ -82,21 +81,19 @@ export function NewTenantDialog({ units }: { units: Unit[] }) {
                 {vacantUnits.length === 0 ? (
                   <p className="text-sm text-slate-500">No vacant units available.</p>
                 ) : (
-                  <Select
+                  <select
                     value={selectedUnit}
-                    onValueChange={v => setSelectedUnit(v ?? '')}
+                    onChange={e => setSelectedUnit(e.target.value)}
+                    className="w-full rounded-lg border border-input bg-transparent px-3 py-2 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/50"
+                    required
                   >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select unit" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {vacantUnits.map(u => (
-                        <SelectItem key={u.id} value={u.id}>
-                          {u.label} · ${u.monthly_rent}/mo
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                    <option value="">Select unit</option>
+                    {vacantUnits.map(u => (
+                      <option key={u.id} value={u.id}>
+                        {u.label} · ${u.monthly_rent}/mo
+                      </option>
+                    ))}
+                  </select>
                 )}
               </div>
               <div className="grid grid-cols-2 gap-3">
